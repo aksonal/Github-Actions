@@ -56,6 +56,7 @@ jobs:
         tag: latest
         registry: docker.io
         dockerfile: ./Dockerfile
+        context: .
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
       

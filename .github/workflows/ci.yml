@@ -55,8 +55,8 @@ jobs:
         image: sk22tp/maven-image
         tag: latest
         registry: docker.io
-        dockerfile: ./Dockerfile
-        context: .
+        dockerfile: Dockerfile
+        directory: .  #ensures the build context is the repo root
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
       

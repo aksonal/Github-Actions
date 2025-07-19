@@ -12,6 +12,12 @@ on:
 jobs:
   build-java:
 
+    #to run jobs on all 3 os 
+    #runs-on: ${{matrix.os}} #ubuntu-latest
+    #strategy:
+      #matrix:
+        #os: [ubuntu-latest, windows-latest, macOS-latest] 
+
     runs-on: ubuntu-latest
     
     steps:
@@ -35,4 +41,20 @@ jobs:
         #registry: docker.io
         #username: ${{ secrets.DOCKER_USERNAME }}
         #password: ${{ secrets.DOCKER_PASSWORD }}
+
          
+  build-docker-img:
+    needs: build-java
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build Docker image & push to DockerHub
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: sk22tp/maven-image
+        registry: docker.io
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      
+    
